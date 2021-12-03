@@ -6,7 +6,7 @@ body {
 .calculator-body {
     height: min-content;
     width: min-content;
-    border: 3px solid darkkhaki;
+    border: 5px solid darkkhaki;
     margin: auto;
     display: grid;
     grid-template-columns: auto;
@@ -17,8 +17,9 @@ body {
 .screen {
     margin: 5px;
     width: 96%;
-    height: 55px;
-    background-color: lightyellow;
+    height: 45px;
+    background-color: #ffffdc;
+    box-shadow: 0 3px rgba(110, 106, 143, 0.7);
 }
 
 .button-area {
@@ -28,8 +29,8 @@ body {
 
 .calculator-button {
     margin: 5px;
-    height: 45px;
-    width: 55px;
+    height: 40px;
+    width: 50px;
     color: #6b6b6b;
     text-decoration: none;
     font: inherit;
@@ -37,23 +38,29 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 2px gray;
+    box-shadow: 0 3px rgba(110, 106, 143, 0.7);
 }
 
 .number {
-    background-color: #d9d9d9;
+    background-color: #e8e6e6;
 }
 
 .number:hover {
-    background-color: #b7b7b7;
+    background-color: #c9c9c9;
 }
 
 .operation {
-    background-color: #e3e153;
+    background-color: #e9fa8a;
+}
+
+.operation:hover {
+    background-color: #d2ec65;
 }
 
 .cancel {
-    background-color: indianred;
+    background-color: #f69a9a;
 }
 
-
+.cancel:hover {
+    background-color: #e78080;
+}
