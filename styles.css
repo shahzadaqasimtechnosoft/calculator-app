@@ -8,8 +8,8 @@ body {
     width: min-content;
     border: 5px solid darkkhaki;
     margin: auto;
-    display: grid;
-    grid-template-columns: auto;
+    display: flex;
+    flex-direction: column;
     padding: 10px;
     background-color: #b8cbf6;
 }
