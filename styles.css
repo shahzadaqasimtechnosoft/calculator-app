@@ -1,13 +1,20 @@
-body {
+html, body {
     font: 15px Arial, sans-serif;
     font-weight: bolder;
+    height: 100%;
+}
+
+.calculator {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .calculator-body {
     height: min-content;
     width: min-content;
     border: 5px solid darkkhaki;
-    margin: auto;
     display: flex;
     flex-direction: column;
     padding: 10px;
