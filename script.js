@@ -1,5 +1,7 @@
+import {addCalculatorButtons} from "./add-buttons.js";
 import {calculate} from "./calculator.js";
 
+addCalculatorButtons();
 let calculatorScreen = document.getElementById('screen');
 
 document.querySelectorAll('.calculator-button').forEach(item => {
