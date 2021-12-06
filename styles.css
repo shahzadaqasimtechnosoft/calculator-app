@@ -33,6 +33,7 @@ html, body {
     font-weight: bold;
     text-align: right;
     line-height: 45px;
+    overflow: hidden;
 }
 
 .button-area {
@@ -51,6 +52,7 @@ html, body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    user-select: none;
     box-shadow: 0 3px rgba(110, 106, 143, 0.7);
 }
 
