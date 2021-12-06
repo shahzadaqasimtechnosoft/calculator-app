@@ -1,35 +1,57 @@
-let add = () => {};
-let subtract = () => {};
-let multiply = () => {};
-let divide = () => {};
+let operations = ['+', '-', '*', '/'];
+
+let add = (a, b) => parseFloat(a) + parseFloat(b);
+let subtract = (a, b) => parseFloat(a) - parseFloat(b);
+let multiply = (a, b) => parseFloat(a) * parseFloat(b);
+let divide = (a, b) => parseFloat(a) / parseFloat(b);
+
+let resolveNegation = (splitUpExpression) => {
+    for (let i = 0; i < splitUpExpression.length; i++) {
+        if (splitUpExpression[i].length > 1) {
+            let currExpression = splitUpExpression[i];
+            if (operations.includes(currExpression[0])) {
+                splitUpExpression[i] = currExpression[0];
+                splitUpExpression.splice(i + 1, 0, currExpression[1]);
+                console.log(splitUpExpression);
+                i = 0;
+            }
+        }
+    }
+    for (let i = 0; i < splitUpExpression.length; i++) {
+        if (splitUpExpression[i] === '-') {
+            if (i === 0 || operations.includes(splitUpExpression[i - 1])) {
+                splitUpExpression[i + 1] = -1 * parseFloat(splitUpExpression[i + 1]);
+                splitUpExpression.splice(i, 1);
+                console.log(splitUpExpression);
+                i = 0;
+            }
+        }
+    }
+    return splitUpExpression;
+};
+
+let evaluate = (splitUpExpression, operation, operationSymbol) => {
+    for (let i = 0; i < splitUpExpression.length; i++) {
+        if (splitUpExpression[i] === operationSymbol) {
+            splitUpExpression[i] = operation(splitUpExpression[i - 1], splitUpExpression[i + 1]);
+            splitUpExpression.splice(i + 1, 1);
+            splitUpExpression.splice(i - 1, 1);
+            console.log(splitUpExpression);
+            i = 0;
+        }
+    }
+    return splitUpExpression;
+};
+
 let calculate = (expr) => {
     console.log(expr);
-    return 'calculated';
+    let splitUp = expr.match(/[^\d]+|[\d]+/g);
+    splitUp = resolveNegation(splitUp);
+    splitUp = evaluate(splitUp, divide, '/');
+    splitUp = evaluate(splitUp, multiply, '*');
+    splitUp = evaluate(splitUp, subtract, '-');
+    let result = evaluate(splitUp, add, '+');
+    return result[0];
 };
-// let expression = "2+-777883*717889";
-// let splitUp = expression.match(/[^\d]+|[\d]+/g);
-// console.log(splitUp);
-//
-// function resolveMultiplication(opr1, opr2) {
-//     return parseInt(opr1) * parseInt(opr2);
-// }
-//
-// function resolveAddition(opr1, opr2) {
-//     return parseInt(opr1) + parseInt(opr2);
-// }
-//
-// for (let i = 0; i < splitUp.length; i++) {
-//     if (splitUp[i] === '*') {
-//         splitUp[i] = resolveMultiplication(splitUp[i-1], splitUp[i+1]);
-//         splitUp.splice(i+1, 1);
-//         splitUp.splice(i-1, 1);
-//         console.log(splitUp);
-//         i = 0;
-//     } else if (splitUp[i] === '+') {
-//         splitUp[i] = resolveAddition(splitUp[i-1], splitUp[i+1]);
-//         console.log(splitUp);
-//     }
-// }
-
 
 export {calculate}

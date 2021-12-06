@@ -23,6 +23,7 @@ html, body {
 
 .screen {
     margin: 5px;
+    padding: 5px 3px 5px 3px;
     width: 96%;
     height: 45px;
     background-color: #ffffdc;
@@ -33,7 +34,8 @@ html, body {
     font-weight: bold;
     text-align: right;
     line-height: 45px;
-    overflow: hidden;
+    overflow: auto;
+    max-width: 230px;
 }
 
 .button-area {
