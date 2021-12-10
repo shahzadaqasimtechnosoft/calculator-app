@@ -1,0 +1,9 @@
+.calculator-body {
+  height: min-content;
+  width: min-content;
+  border: 5px solid darkkhaki;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #b8cbf6;
+}
