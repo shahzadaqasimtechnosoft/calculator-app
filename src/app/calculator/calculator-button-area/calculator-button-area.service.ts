@@ -1,8 +1,11 @@
 import {Injectable} from "@angular/core";
 import {CalculatorButton} from "./calculator-button/calculator-button.model";
+import {Subject} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class CalculatorButtonAreaService {
+  inputMaker = new Subject<string>();
+
   private buttons: CalculatorButton[] = [
     new CalculatorButton('1', 'number'),
     new CalculatorButton('2', 'number'),
@@ -24,5 +27,9 @@ export class CalculatorButtonAreaService {
 
   getButtons(): CalculatorButton[] {
     return this.buttons;
+  }
+
+  addToInput(value: string) {
+    this.inputMaker.next(value);
   }
 }

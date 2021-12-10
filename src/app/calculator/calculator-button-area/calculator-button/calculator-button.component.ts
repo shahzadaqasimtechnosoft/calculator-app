@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {CalculatorButtonAreaService} from "../calculator-button-area.service";
 
 @Component({
   selector: 'app-calculator-button',
@@ -9,9 +10,12 @@ export class CalculatorButtonComponent implements OnInit {
   @Input('type') type!: string;
   @Input('value') value!:string;
 
-  constructor() { }
+  constructor(private buttonService: CalculatorButtonAreaService) { }
 
   ngOnInit(): void {
   }
 
+  onButtonClicked() {
+    this.buttonService.addToInput(this.value);
+  }
 }
