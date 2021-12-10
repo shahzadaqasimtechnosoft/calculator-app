@@ -1,3 +1,10 @@
+main {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .calculator-body {
   height: min-content;
   width: min-content;
