@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-calculator-button',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calculator-button.component.css']
 })
 export class CalculatorButtonComponent implements OnInit {
+  @Input('type') type!: string;
+  @Input('value') value!:string;
 
   constructor() { }
 
