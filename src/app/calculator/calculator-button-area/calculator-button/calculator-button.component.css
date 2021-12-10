@@ -1,0 +1,38 @@
+.calculator-button {
+  margin: 5px;
+  height: 40px;
+  width: 50px;
+  color: #6b6b6b;
+  text-decoration: none;
+  font: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 3px rgba(110, 106, 143, 0.7);
+}
+
+.number {
+  background-color: #e8e6e6;
+}
+
+.number:hover {
+  background-color: #c9c9c9;
+}
+
+.operation {
+  background-color: #e9fa8a;
+}
+
+.operation:hover {
+  background-color: #d2ec65;
+}
+
+.cancel {
+  background-color: #f69a9a;
+}
+
+.cancel:hover {
+  background-color: #e78080;
+}
