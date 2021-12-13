@@ -36,8 +36,9 @@ export class CalculatorButtonAreaService {
 
   addToInput(value: string) {
     if (value === '=') {
-      this.expressionEmitter.next(this.input);
+      const inputExpression = this.input;
       this.input = eval(this.input);
+      this.expressionEmitter.next(inputExpression + " = " + this.input);
     } else if (value === 'C') {
       this.input = '';
     } else {
