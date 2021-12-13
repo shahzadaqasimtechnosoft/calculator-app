@@ -1,0 +1,16 @@
+.history-item {
+  width: 400px;
+  height: 25px;
+  padding: 5px;
+}
+
+.history-heading {
+  background-color: darkkhaki;
+  color: white;
+}
+
+.history-entry {
+  background-color: #b8cbf6;
+  font-weight: normal;
+  color: black;
+}
