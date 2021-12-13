@@ -7,6 +7,7 @@ import {CalculatorButton} from "./calculator-button/calculator-button.model";
 export class CalculatorButtonAreaService {
   private input: string = '';
   inputMaker = new Subject<string>();
+  expressionEmitter = new Subject<string>();
 
   private buttons: CalculatorButton[] = [
     new CalculatorButton('1', 'number'),
@@ -35,6 +36,7 @@ export class CalculatorButtonAreaService {
 
   addToInput(value: string) {
     if (value === '=') {
+      this.expressionEmitter.next(this.input);
       this.input = eval(this.input);
     } else if (value === 'C') {
       this.input = '';
