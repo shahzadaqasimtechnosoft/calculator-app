@@ -7,6 +7,7 @@ import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorButtonAreaComponent } from './calculator/calculator-button-area/calculator-button-area.component';
 import { CalculatorScreenComponent } from './calculator/calculator-screen/calculator-screen.component';
 import { CalculatorButtonComponent } from './calculator/calculator-button-area/calculator-button/calculator-button.component';
+import { CalculatorHistoryComponent } from './calculator-history/calculator-history.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CalculatorButtonComponent } from './calculator/calculator-button-area/c
     CalculatorComponent,
     CalculatorButtonAreaComponent,
     CalculatorScreenComponent,
-    CalculatorButtonComponent
+    CalculatorButtonComponent,
+    CalculatorHistoryComponent
   ],
   imports: [
     BrowserModule,
