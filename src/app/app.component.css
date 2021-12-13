@@ -1,3 +1,17 @@
+.error {
+  padding: 5px;
+  width: 100%;
+  background-color: rosybrown;
+  border: 1px solid brown;
+  color: darkslategray;
+  height: min-content;
+}
+
+.error-button {
+  margin: 10px;
+  width: 10%;
+}
+
 .app-area {
   height: 100%;
   display: flex;
