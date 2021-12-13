@@ -7,15 +7,11 @@ export class ExpressionStoreService {
   constructor(private http: HttpClient) {
   }
 
-  persist(expr: string) {
+  persist(expr: string): Observable<any> {
     const expression = {expression: expr};
-    this.http.post(
+    return this.http.post(
       'https://ng-calculator-562d4-default-rtdb.firebaseio.com/expressions.json',
-      expression).subscribe({
-      next: (responseData) => {
-        console.log(responseData);
-      }
-    });
+      expression);
   }
 
   retrieveAll(): Observable<any> {
