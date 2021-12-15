@@ -2,9 +2,11 @@ import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
 
 import {CalculatorButton} from "./calculator-button/calculator-button.model";
+import {ErrorService} from "../../error.service";
 
 @Injectable({providedIn: 'root'})
 export class CalculatorButtonAreaService {
+  private allowedInputLength = 20;
   private input: string = '';
   inputMaker = new Subject<string>();
   expressionEmitter = new Subject<string>();
@@ -28,14 +30,17 @@ export class CalculatorButtonAreaService {
     new CalculatorButton('/', 'operation')
   ];
 
-  constructor() {}
+  constructor(private errorService: ErrorService) {}
 
   getButtons(): CalculatorButton[] {
     return this.buttons;
   }
 
   addToInput(value: string) {
-    if (value === '=') {
+    if (this.input.length > (this.allowedInputLength - 1)) {
+      this.input = ''
+      this.errorService.emitError('Input Exceeded Limit', `Input exceeded the limit of ${this.allowedInputLength} characters. Please make sure you add no more than ${this.allowedInputLength} characters.`)
+    } else if (value === '=') {
       const inputExpression = this.input;
       this.input = eval(this.input);
       this.expressionEmitter.next(inputExpression + " = " + this.input);
