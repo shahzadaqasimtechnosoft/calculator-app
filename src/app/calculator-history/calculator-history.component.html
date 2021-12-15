@@ -1,10 +1,12 @@
-<div class="history-item history-heading">
-  History
-  <fa-icon
-    style="float: right;"
-    [icon]="delete"
-    (click)="onDeleteAll()"></fa-icon>
+<div class="calculator-history">
+  <div class="history-item history-heading">
+    History
+    <fa-icon
+      style="float: right;"
+      [icon]="delete"
+      (click)="onDeleteAll()"></fa-icon>
+  </div>
+  <div
+    *ngFor="let expression of expressions"
+    class="history-item history-entry">{{ expression }}</div>
 </div>
-<div
-  *ngFor="let expression of expressions"
-  class="history-item history-entry">{{ expression }}</div>

@@ -1,6 +1,13 @@
+.calculator-history {
+  height: 250px;
+  background-color: #b8cbf6;
+  overflow-y: auto;
+}
+
 .history-item {
-  width: 98%;
+  width: 100%;
   min-width: 400px;
+  max-width: 400px;
   padding: 5px;
 }
 
