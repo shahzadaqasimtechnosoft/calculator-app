@@ -1,6 +1,6 @@
 .history-item {
-  width: 400px;
-  height: 25px;
+  width: 98%;
+  min-width: 400px;
   padding: 5px;
 }
 

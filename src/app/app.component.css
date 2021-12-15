@@ -12,14 +12,29 @@
   width: 10%;
 }
 
-.app-area {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+@media only screen and (max-width: 600px){
+  .app-area {
+    width: 97%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .side-by-side {
+    margin: 30px;
+  }
 }
 
-.side-by-side {
-  margin: 30px;
+@media only screen and (min-width: 1000px){
+  .app-area {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .side-by-side {
+    margin: 30px;
+  }
 }
