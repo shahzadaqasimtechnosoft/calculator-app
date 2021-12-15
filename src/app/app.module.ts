@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { CalculatorButtonAreaComponent } from './calculator/calculator-button-area/calculator-button-area.component';
@@ -22,7 +21,6 @@ import { CalculatorHistoryComponent } from './calculator-history/calculator-hist
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule
   ],
