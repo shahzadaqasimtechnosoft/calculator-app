@@ -41,7 +41,7 @@ export class CalculatorButtonAreaService {
 
     if (this.previousButtonClicked.cssClass !== 'number' && buttonClicked.cssClass !== 'number') {
       this.input = '';
-      this.errorService.emitError('Only Single Operators Allowed', "Please make sure you use single operators e.g, +, -, etc. NOT +-, *-, etc.");
+      this.errorService.emitError('Operator Error', "Please make sure you use single operators e.g, +, -, etc. NOT +-, *-, etc. AND you don't use operators without operands e.g, +, *, etc.");
       this.inputMaker.next(this.input);
       return;
     }
