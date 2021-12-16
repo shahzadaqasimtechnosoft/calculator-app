@@ -21,6 +21,14 @@
   background-color: #c9c9c9;
 }
 
+.equal {
+  background-color: #e8e6e6;
+}
+
+.equal:hover {
+  background-color: #c9c9c9;
+}
+
 .operation {
   background-color: #e9fa8a;
 }

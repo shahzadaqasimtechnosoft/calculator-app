@@ -8,6 +8,9 @@ import {ErrorService} from "../../error.service";
 export class CalculatorButtonAreaService {
   private allowedInputLength = 20;
   private input = '';
+  private isSignificantZero = false;
+  private firstZero = false;
+  private previousButtonClicked = new CalculatorButton('', '');
   inputMaker = new Subject<string>();
   expressionStore = new Subject<string>();
 
@@ -26,7 +29,7 @@ export class CalculatorButtonAreaService {
     new CalculatorButton('*', 'operation'),
     new CalculatorButton('C', 'cancel'),
     new CalculatorButton('0', 'number'),
-    new CalculatorButton('=', 'number'),
+    new CalculatorButton('=', 'equal'),
     new CalculatorButton('/', 'operation')
   ];
 
@@ -36,24 +39,36 @@ export class CalculatorButtonAreaService {
     return this.buttons;
   }
 
-  addToInput(button: CalculatorButton) {
-    if (this.input.length > (this.allowedInputLength - 1)) {
-      this.input = ''
-      this.errorService.emitError('Input Exceeded Limit', `Input exceeded the limit of ${this.allowedInputLength} characters. Please make sure you add no more than ${this.allowedInputLength} characters.`)
-    } else if (button.value === '=') {
-      const inputExpression = this.input;
-      this.input = eval(inputExpression);
-      if (this.input.toString() === Infinity.toString()) {
-        this.input = 'Math Error';
-        this.expressionStore.next(`${inputExpression} (Math Error)`);
-      } else {
-        this.expressionStore.next(`${inputExpression} = ${this.input}`);
-      }
-    } else if (button.value === 'C') {
-      this.input = '';
+  private evaluate(): void {
+    const inputExpression = this.input;
+    this.input = eval(inputExpression);
+    if (this.input.toString() === Infinity.toString()) {
+      this.input = 'Math Error';
+      this.expressionStore.next(`${inputExpression} (Math Error)`);
     } else {
-      this.input = this.input + button.value;
+      this.expressionStore.next(`${inputExpression} = ${this.input}`);
     }
+  }
+
+  addToInput(buttonClicked: CalculatorButton) {
+    if (this.input.length > (this.allowedInputLength - 1)) {
+      this.input = '';
+      this.errorService.emitError('Input Exceeded Limit', `Input exceeded the limit of ${this.allowedInputLength} characters. Please make sure you add no more than ${this.allowedInputLength} characters.`);
+      this.inputMaker.next(this.input);
+      return;
+    }
+
+    if (buttonClicked.value === '=') {
+      this.evaluate();
+    } else if (buttonClicked.value === 'C') {
+      this.input = '';
+    } else if (buttonClicked.value == '0' && !this.isSignificantZero) {
+      return;
+    } else {
+      this.input = this.input + buttonClicked.value;
+    }
+
+    this.previousButtonClicked = buttonClicked;
     this.inputMaker.next(this.input);
   }
 }
