@@ -7,7 +7,7 @@ import {ErrorService} from "../../error.service";
 @Injectable({providedIn: 'root'})
 export class CalculatorButtonAreaService {
   private allowedInputLength = 20;
-  private input: string = '';
+  private input = '';
   inputMaker = new Subject<string>();
   expressionEmitter = new Subject<string>();
 
@@ -43,7 +43,12 @@ export class CalculatorButtonAreaService {
     } else if (value === '=') {
       const inputExpression = this.input;
       this.input = eval(this.input);
-      this.expressionEmitter.next(inputExpression + " = " + this.input);
+      if (this.input.toString() === Infinity.toString()) {
+        this.input = 'Math Error';
+        this.expressionEmitter.next(inputExpression + ' (Math Error)');
+      } else {
+        this.expressionEmitter.next(inputExpression + " = " + this.input);
+      }
     } else if (value === 'C') {
       this.input = '';
     } else {
