@@ -1,0 +1,66 @@
+[
+  {
+    "value": "1",
+    "cssClass": "number"
+  },
+  {
+    "value": "2",
+    "cssClass": "number"
+  },
+  {
+    "value": "3",
+    "cssClass": "number"
+  },
+  {
+    "value": "+",
+    "cssClass": "operation"
+  },
+  {
+    "value": "4",
+    "cssClass": "number"
+  },
+  {
+    "value": "5",
+    "cssClass": "number"
+  },
+  {
+    "value": "6",
+    "cssClass": "number"
+  },
+  {
+    "value": "-",
+    "cssClass": "operation"
+  },
+  {
+    "value": "7",
+    "cssClass": "number"
+  },
+  {
+    "value": "8",
+    "cssClass": "number"
+  },
+  {
+    "value": "9",
+    "cssClass": "number"
+  },
+  {
+    "value": "*",
+    "cssClass": "operation"
+  },
+  {
+    "value": "C",
+    "cssClass": "cancel"
+  },
+  {
+    "value": "0",
+    "cssClass": "number"
+  },
+  {
+    "value": "=",
+    "cssClass": "number"
+  },
+  {
+    "value": "/",
+    "cssClass": "operation"
+  }
+]
