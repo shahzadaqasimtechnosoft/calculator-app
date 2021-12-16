@@ -9,7 +9,7 @@ export class CalculatorButtonAreaService {
   private allowedInputLength = 20;
   private input = '';
   inputMaker = new Subject<string>();
-  expressionEmitter = new Subject<string>();
+  expressionStore = new Subject<string>();
 
   private buttons: CalculatorButton[] = [
     new CalculatorButton('1', 'number'),
@@ -36,23 +36,23 @@ export class CalculatorButtonAreaService {
     return this.buttons;
   }
 
-  addToInput(value: string) {
+  addToInput(button: CalculatorButton) {
     if (this.input.length > (this.allowedInputLength - 1)) {
       this.input = ''
       this.errorService.emitError('Input Exceeded Limit', `Input exceeded the limit of ${this.allowedInputLength} characters. Please make sure you add no more than ${this.allowedInputLength} characters.`)
-    } else if (value === '=') {
+    } else if (button.value === '=') {
       const inputExpression = this.input;
-      this.input = eval(this.input);
+      this.input = eval(inputExpression);
       if (this.input.toString() === Infinity.toString()) {
         this.input = 'Math Error';
-        this.expressionEmitter.next(inputExpression + ' (Math Error)');
+        this.expressionStore.next(`${inputExpression} (Math Error)`);
       } else {
-        this.expressionEmitter.next(inputExpression + " = " + this.input);
+        this.expressionStore.next(`${inputExpression} = ${this.input}`);
       }
-    } else if (value === 'C') {
+    } else if (button.value === 'C') {
       this.input = '';
     } else {
-      this.input = this.input + value;
+      this.input = this.input + button.value;
     }
     this.inputMaker.next(this.input);
   }

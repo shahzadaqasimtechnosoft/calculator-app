@@ -33,7 +33,7 @@ export class CalculatorHistoryComponent implements OnInit, OnDestroy {
           this.errorService.emitError(error.name, error.message + ' (error occurred while retrieving)');
         }
       });
-    this.buttonServiceSubscription = this.buttonService.expressionEmitter
+    this.buttonServiceSubscription = this.buttonService.expressionStore
       .subscribe((expression:string) => {
         this.expressions.push(expression);
         this.persistSubscription = this.persistenceService.persist(expression)
