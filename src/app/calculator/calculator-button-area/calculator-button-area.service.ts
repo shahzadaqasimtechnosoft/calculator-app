@@ -7,14 +7,16 @@ import buttons from "./calculator-buttons.json"
 
 @Injectable({providedIn: 'root'})
 export class CalculatorButtonAreaService {
-  private buttons:CalculatorButton[] = buttons;
+  private buttons: CalculatorButton[] = buttons;
   private allowedInputLength = 20;
   private input = '';
+  private allowZero = false;
   private previousButtonClicked = new CalculatorButton('', '');
   inputMaker = new Subject<string>();
   expressionStore = new Subject<string>();
 
-  constructor(private errorService: ErrorService) {}
+  constructor(private errorService: ErrorService) {
+  }
 
   getButtons(): CalculatorButton[] {
     return this.buttons;
@@ -31,6 +33,8 @@ export class CalculatorButtonAreaService {
     }
   }
 
+  private significantDigits = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
   addToInput(buttonClicked: CalculatorButton) {
     if (this.input.length > (this.allowedInputLength - 1)) {
       this.input = '';
@@ -44,6 +48,22 @@ export class CalculatorButtonAreaService {
       this.errorService.emitError('Operator Error', "Please make sure you use single operators e.g, +, -, etc. NOT +-, *-, etc. AND you don't use operators without operands e.g, +, *, etc.");
       this.inputMaker.next(this.input);
       return;
+    }
+
+    if (this.significantDigits.includes(buttonClicked.value)) {
+      this.allowZero = true;
+    } else if (buttonClicked.cssClass !== 'number') {
+      this.allowZero = false;
+    }
+
+    if ((this.previousButtonClicked.value === '0' && buttonClicked.cssClass === 'number')) {
+      if (!this.allowZero) {
+        if (buttonClicked.value !== '=') {
+          return;
+        } else {
+          this.input = this.input.slice(0, -1);
+        }
+      }
     }
 
     if (buttonClicked.value === '=') {
