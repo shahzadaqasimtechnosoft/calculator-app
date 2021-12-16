@@ -3,35 +3,15 @@ import {Subject} from "rxjs";
 
 import {CalculatorButton} from "./calculator-button/calculator-button.model";
 import {ErrorService} from "../../error.service";
+import buttons from "./calculator-buttons.json"
 
 @Injectable({providedIn: 'root'})
 export class CalculatorButtonAreaService {
+  private buttons:CalculatorButton[] = buttons;
   private allowedInputLength = 20;
   private input = '';
-  private isSignificantZero = false;
-  private firstZero = false;
-  private previousButtonClicked = new CalculatorButton('', '');
   inputMaker = new Subject<string>();
   expressionStore = new Subject<string>();
-
-  private buttons: CalculatorButton[] = [
-    new CalculatorButton('1', 'number'),
-    new CalculatorButton('2', 'number'),
-    new CalculatorButton('3', 'number'),
-    new CalculatorButton('+', 'operation'),
-    new CalculatorButton('4', 'number'),
-    new CalculatorButton('5', 'number'),
-    new CalculatorButton('6', 'number'),
-    new CalculatorButton('-', 'operation'),
-    new CalculatorButton('7', 'number'),
-    new CalculatorButton('8', 'number'),
-    new CalculatorButton('9', 'number'),
-    new CalculatorButton('*', 'operation'),
-    new CalculatorButton('C', 'cancel'),
-    new CalculatorButton('0', 'number'),
-    new CalculatorButton('=', 'equal'),
-    new CalculatorButton('/', 'operation')
-  ];
 
   constructor(private errorService: ErrorService) {}
 
@@ -62,13 +42,10 @@ export class CalculatorButtonAreaService {
       this.evaluate();
     } else if (buttonClicked.value === 'C') {
       this.input = '';
-    } else if (buttonClicked.value == '0' && !this.isSignificantZero) {
-      return;
     } else {
       this.input = this.input + buttonClicked.value;
     }
 
-    this.previousButtonClicked = buttonClicked;
     this.inputMaker.next(this.input);
   }
 }
