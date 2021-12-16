@@ -10,6 +10,7 @@ export class CalculatorButtonAreaService {
   private buttons:CalculatorButton[] = buttons;
   private allowedInputLength = 20;
   private input = '';
+  private previousButtonClicked = new CalculatorButton('', '');
   inputMaker = new Subject<string>();
   expressionStore = new Subject<string>();
 
@@ -38,6 +39,13 @@ export class CalculatorButtonAreaService {
       return;
     }
 
+    if (this.previousButtonClicked.cssClass !== 'number' && buttonClicked.cssClass !== 'number') {
+      this.input = '';
+      this.errorService.emitError('Only Single Operators Allowed', "Please make sure you use single operators e.g, +, -, etc. NOT +-, *-, etc.");
+      this.inputMaker.next(this.input);
+      return;
+    }
+
     if (buttonClicked.value === '=') {
       this.evaluate();
     } else if (buttonClicked.value === 'C') {
@@ -46,6 +54,7 @@ export class CalculatorButtonAreaService {
       this.input = this.input + buttonClicked.value;
     }
 
+    this.previousButtonClicked = buttonClicked;
     this.inputMaker.next(this.input);
   }
 }
