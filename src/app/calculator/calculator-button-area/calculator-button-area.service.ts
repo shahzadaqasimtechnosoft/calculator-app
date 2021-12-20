@@ -11,6 +11,8 @@ export class CalculatorButtonAreaService {
   private allowedInputLength = 20;
   private input = '';
   private allowZero = false;
+  private significantDigits = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  private operations = ['+', '-', '*', '/'];
   private previousButtonClicked = new CalculatorButton('', '');
   inputMaker = new Subject<string>();
   expressionStore = new Subject<string>();
@@ -32,8 +34,6 @@ export class CalculatorButtonAreaService {
       this.expressionStore.next(`${inputExpression} = ${this.input}`);
     }
   }
-
-  private significantDigits = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   addToInput(buttonClicked: CalculatorButton) {
     if (this.input.length > (this.allowedInputLength - 1)) {
@@ -60,9 +60,10 @@ export class CalculatorButtonAreaService {
       if (!this.allowZero) {
         if (buttonClicked.value !== '=') {
           return;
-        } else {
-          this.input = this.input.slice(0, -1);
         }
+      }
+      if (buttonClicked.value !== '0' && this.operations.includes(this.input[this.input.length - 2])) {
+        this.input = this.input.slice(0, -1);
       }
     }
 
