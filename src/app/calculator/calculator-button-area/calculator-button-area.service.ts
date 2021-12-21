@@ -26,7 +26,9 @@ export class CalculatorButtonAreaService {
 
   private evaluate(): void {
     const inputExpression = this.input;
+    console.log(inputExpression);
     this.input = eval(inputExpression);
+    console.log(this.input);
     if (this.input.toString() === Infinity.toString()) {
       this.input = 'Math Error';
       this.expressionStore.next(`${inputExpression} (Math Error)`);
@@ -83,12 +85,13 @@ export class CalculatorButtonAreaService {
           return;
         }
       }
-      if (buttonClicked.value !== '0' && this.operations.includes(this.input[this.input.length - 2])) {
+      if (buttonClicked.value !== '0' && buttonClicked.value !== '=' && this.operations.includes(this.input[this.input.length - 2])) {
         this.input = this.input.slice(0, -1);
       }
     }
 
     if (buttonClicked.value === '=' || buttonClicked.value === 'Enter') {
+      console.log(this.input);
       this.evaluate();
     } else if (buttonClicked.value === 'C' || buttonClicked.value === 'c') {
       this.input = '';
