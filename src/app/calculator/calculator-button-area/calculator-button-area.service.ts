@@ -29,7 +29,7 @@ export class CalculatorButtonAreaService {
     console.log(inputExpression);
     this.input = eval(inputExpression);
     console.log(this.input);
-    if (this.input.toString() === Infinity.toString()) {
+    if (this.input.toString() === Infinity.toString() || isNaN(Number(this.input))) {
       this.input = '';
       this.errorService.emitError('Math Error', 'Math error! Please make sure that you are not performing an illegal operation such as division by 0.');
     } else {
@@ -81,11 +81,12 @@ export class CalculatorButtonAreaService {
 
     if ((this.previousButtonClicked.value === '0' && buttonClicked.cssClass === 'number')) {
       if (!this.allowZero) {
-        if (buttonClicked.value !== '=') {
+        console.log(buttonClicked.value);
+        if (buttonClicked.value !== '=' && buttonClicked.value !== 'Enter') {
           return;
         }
       }
-      if (buttonClicked.value !== '0' && buttonClicked.value !== '=' && this.operations.includes(this.input[this.input.length - 2])) {
+      if (buttonClicked.value !== '0' && buttonClicked.value !== '=' && buttonClicked.value !== 'Enter' && this.operations.includes(this.input[this.input.length - 2])) {
         this.input = this.input.slice(0, -1);
       }
     }
