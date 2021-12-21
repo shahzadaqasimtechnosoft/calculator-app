@@ -30,8 +30,8 @@ export class CalculatorButtonAreaService {
     this.input = eval(inputExpression);
     console.log(this.input);
     if (this.input.toString() === Infinity.toString()) {
-      this.input = 'Math Error';
-      this.expressionStore.next(`${inputExpression} (Math Error)`);
+      this.input = '';
+      this.errorService.emitError('Math Error', 'Math error! Please make sure that you are not performing an illegal operation such as division by 0.');
     } else {
       this.expressionStore.next(`${inputExpression} = ${this.input}`);
     }
