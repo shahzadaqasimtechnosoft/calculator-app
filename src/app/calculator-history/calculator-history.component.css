@@ -1,4 +1,4 @@
-.calculator-history {
+:host {
   height: 250px;
   background-color: #b8cbf6;
   overflow-y: auto;

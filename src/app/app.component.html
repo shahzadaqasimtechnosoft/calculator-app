@@ -1,11 +1,9 @@
-<div style="height: 100%;">
-  <div class="error" *ngIf="isError">
-    <h3>Error: {{this.errorHeading}}</h3>
-    <p>{{ errorMessage }}</p>
-    <button class="error-button" (click)="onErrorHandle()">Ok</button>
-  </div>
-  <div class="app-area">
-    <app-calculator-history class="side-by-side"></app-calculator-history>
-    <app-calculator class="side-by-side"></app-calculator>
-  </div>
+<div class="error" *ngIf="isError">
+  <h3>Error: {{this.errorHeading}}</h3>
+  <p>{{ errorMessage }}</p>
+  <button class="error-button" (click)="onErrorHandle()">Ok</button>
+</div>
+<div class="app-area">
+  <app-calculator-history class="side-by-side"></app-calculator-history>
+  <app-calculator class="side-by-side"></app-calculator>
 </div>
