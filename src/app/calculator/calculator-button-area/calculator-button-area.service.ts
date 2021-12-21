@@ -35,11 +35,32 @@ export class CalculatorButtonAreaService {
     }
   }
 
+  private getButtonClassFromValue(value: string): string {
+    if (this.significantDigits.includes(value) || value === '0' || value === '=' || value === 'Enter') {
+      return 'number';
+    } else if (this.operations.includes(value)) {
+      return 'operation';
+    } else if (value === 'C' || value === 'c') {
+      return 'cancel';
+    }
+    return 'other';
+  }
+
+  onInputFromKeyboard(value: string) {
+    this.addToInput(new CalculatorButton(value, this.getButtonClassFromValue(value)));
+  }
+
   addToInput(buttonClicked: CalculatorButton) {
     if (this.input.length > (this.allowedInputLength - 1)) {
       this.input = '';
       this.errorService.emitError('Input Exceeded Limit', `Input exceeded the limit of ${this.allowedInputLength} characters. Please make sure you add no more than ${this.allowedInputLength} characters.`);
       this.inputMaker.next(this.input);
+      return;
+    }
+
+    if (buttonClicked.cssClass === 'other') {
+      console.log('Other character');
+      this.errorService.emitError('Invalid Character', 'Please input a valid character (that is present on the calculator).');
       return;
     }
 
@@ -67,9 +88,9 @@ export class CalculatorButtonAreaService {
       }
     }
 
-    if (buttonClicked.value === '=') {
+    if (buttonClicked.value === '=' || buttonClicked.value === 'Enter') {
       this.evaluate();
-    } else if (buttonClicked.value === 'C') {
+    } else if (buttonClicked.value === 'C' || buttonClicked.value === 'c') {
       this.input = '';
     } else {
       this.input = this.input + buttonClicked.value;
