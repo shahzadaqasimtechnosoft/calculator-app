@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 main {
   height: 100%;
   display: flex;
